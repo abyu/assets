@@ -1,0 +1,47 @@
+openapi: 3.1.0
+info:
+  title: Assets API
+  version: "1.0"
+servers:
+  - url: "/v1"
+paths:
+  /health:
+    get:
+      responses:
+        '204':
+          description: NoContent
+  /transactions:
+    post:
+      description: Record a new transaction
+      responses:
+        '201':
+          description: Created
+        "400":
+          description: Bad request
+components:
+  schemas:
+    Transaction:
+      properties:
+        transactionType:
+          type: string
+          enum:
+            - PURCHASE
+            - SALE
+        date:
+          type: string
+          format: date
+        assetType:
+          type: string
+          enum:
+            - CRYPTO
+            - SHARE
+        assertCode:
+          type: string
+        numberOfUnits:
+          type: number
+      required:
+        - transactionType
+        - date
+        - assertCode
+        - assetType
+        - numberOfUnits
